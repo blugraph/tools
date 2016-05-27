@@ -8,7 +8,6 @@ import re
 import shutil
 
 
-
 WPA_DIR="/etc/wpa_supplicant"
 WPA_FILE="wpa_supplicant.conf"
 #IDLINE="SVCSENSOR"
@@ -28,8 +27,9 @@ SERVER_ADDR="http://52.74.191.39/BluIEQ/sensorstatus.php"
 
 
 payload=[{"stationID":stID}]
-#try:
-while 1:
+#while 1:
+try:
+
   r1 = requests.put(STATUS_URL, json.dumps(payload), timeout=0.1)
   data= json.loads(r1.content)	
   print data
@@ -50,11 +50,11 @@ while 1:
         f.write("\tpriority="+str(data[1])+"\n")
 	f.write("}\n")
 	f.close()
-#	try:    
-#                r1 = requests.put(WIFI_UPDATE_URL, json.dumps(payload), timeout=0.1)
-#                print r1.content
-#        except:
- #               print "Network Connection failure"
+	try:    
+                r1 = requests.put(WIFI_UPDATE_URL, json.dumps(payload), timeout=0.1)
+                print r1.content
+        except:
+                print "Network Connection failure at Personal"
 
   elif data[0]=="Ent":
 	shutil.copy2(curr_file, abs_file_name) 
@@ -70,16 +70,16 @@ while 1:
 	f.write("\tpriority="+str(data[1])+"\n")
         f.write("}\n")
         f.close()
- # 	try:	
-#		r1 = requests.put(WIFI_UPDATE_URL, json.dumps(payload), timeout=0.1)
-#  		print r1.content
-#	except:
-#		print "Network Connection failure"	
+  	try:	
+		r1 = requests.put(WIFI_UPDATE_URL, json.dumps(payload), timeout=0.1)
+  		print r1.content
+	except:
+		print "Network Connection failure at enterprise"	
   else:
 	print "Nothing to update"	
-  time.sleep(10) 	
-#except:
-#  print ": Network Failed when getting the WiFI Update"
+#  time.sleep(10) 	
+except:
+  print ": Network Failed when getting the WiFI Update"
 
 
 
