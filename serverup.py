@@ -8,6 +8,7 @@ import re
 import shutil
 
 
+
 WPA_DIR="/etc/wpa_supplicant"
 WPA_FILE="wpa_supplicant.conf"
 #IDLINE="SVCSENSOR"
