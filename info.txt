@@ -1,0 +1,1 @@
+arn:aws:iot:ap-southeast-1:658774400218:thing/hello
